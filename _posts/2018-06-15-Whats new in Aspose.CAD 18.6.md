@@ -1,3 +1,10 @@
+---
+title: What's new in Aspose.CAD 18.6
+layout: post
+tags: csharp, java, cad, convert
+---
+
+
 A new version of Aspose.CAD, designated 18.6 is soon to be released. Here are the most important changes:
 
 ## New features
