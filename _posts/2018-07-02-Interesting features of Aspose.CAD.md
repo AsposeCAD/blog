@@ -1,3 +1,10 @@
+---
+title: Interesting features of Aspose.CAD
+layout: post
+tags: csharp, java, cad, convert
+---
+
+
 Hello, in this article I'm going to list what distinguishes Aspose.CAD from other similar software and generally about it's interesting features.
 
 
