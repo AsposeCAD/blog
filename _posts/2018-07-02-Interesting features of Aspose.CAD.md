@@ -7,9 +7,147 @@ tags: csharp, java, cad, convert
 
 Hello, in this article I'm going to list what distinguishes <a href="https://products.aspose.com/cad/">Aspose.CAD</a> from other similar software and generally about it's interesting features.
 
+## Export to specified output dimension
+It is possible to set up specific dimensions for output PDF file, to export to A4 sized document, for example. There is an example on how to setup Aspose.CAD to output desired PDF size. Contents of the exported area will be rescaled to fit into output document area, without aspect ratio change. Also note that the code sample also contains example for raster output, which is much simpler - just multiply desired DPI by desired output document dimensions and you get desired the raster image resolution.
+```csharp
+public static void Run()
+{
+    using (var cadImage = Image.Load("visualization_-_conference_room.dwg"))
+    {
+
+        // export to pdf
+        CadRasterizationOptions rasterizationOptions = new CadRasterizationOptions();
+        rasterizationOptions.Layouts = new string[] { "Model" };
+
+        bool currentUnitIsMetric = false;
+        double currentUnitCoefficient = 1.0;
+        DefineUnitSystem(cadImage.UnitType, out currentUnitIsMetric, out currentUnitCoefficient);
+
+        if (currentUnitIsMetric)
+        {
+            double metersCoeff = 1 / 1000.0;
+
+            double scaleFactor = metersCoeff / currentUnitCoefficient;
+
+            rasterizationOptions.PageWidth = (float)(210 * scaleFactor);
+            rasterizationOptions.PageHeight = (float)(297 * scaleFactor);
+            rasterizationOptions.UnitType = UnitType.Millimeter;
+        }
+        else
+        {
+            rasterizationOptions.PageWidth = (float)(8.27f / currentUnitCoefficient);
+            rasterizationOptions.PageHeight = (float)(11.69f / currentUnitCoefficient);
+            rasterizationOptions.UnitType = UnitType.Inch;
+        }
+
+        rasterizationOptions.AutomaticLayoutsScaling = true;
+
+        PdfOptions pdfOptions = new PdfOptions
+        {
+            VectorRasterizationOptions = rasterizationOptions
+        };
+
+        cadImage.Save("out.pdf", pdfOptions);
+
+        PngOptions png = new PngOptions();
+        png.VectorRasterizationOptions = rasterizationOptions;
+        // export to raster
+        //A4 size at 300 DPI - 2480 x 3508  
+        rasterizationOptions.PageHeight = 3508;
+        rasterizationOptions.PageWidth = 2480;
+
+        cadImage.Save("out.png", png);
+    }
+
+}
+
+private static void DefineUnitSystem(UnitType unitType, out bool isMetric, out double coefficient)
+{
+    isMetric = false;
+    coefficient = 1.0;
+
+    switch (unitType)
+    {
+        case UnitType.Parsec:
+            coefficient = 3.0857 * 10000000000000000.0;
+            isMetric = true;
+            break;
+        case UnitType.LightYear:
+            coefficient = 9.4607 * 1000000000000000.0;
+            isMetric = true;
+            break;
+        case UnitType.AstronomicalUnit:
+            coefficient = 1.4960 * 100000000000.0;
+            isMetric = true;
+            break;
+        case UnitType.Gigameter:
+            coefficient = 1000000000.0;
+            isMetric = true;
+            break;
+        case UnitType.Kilometer:
+            coefficient = 1000.0;
+            isMetric = true;
+            break;
+        case UnitType.Decameter:
+            isMetric = true;
+            coefficient = 10.0;
+            break;
+        case UnitType.Hectometer:
+            isMetric = true;
+            coefficient = 100.0;
+            break;
+        case UnitType.Meter:
+            isMetric = true;
+            coefficient = 1.0;
+            break;
+        case UnitType.Centimenter:
+            isMetric = true;
+            coefficient = 0.01;
+            break;
+        case UnitType.Decimeter:
+            isMetric = true;
+            coefficient = 0.1;
+            break;
+        case UnitType.Millimeter:
+            isMetric = true;
+            coefficient = 0.001;
+            break;
+        case UnitType.Micrometer:
+            isMetric = true;
+            coefficient = 0.000001;
+            break;
+        case UnitType.Nanometer:
+            isMetric = true;
+            coefficient = 0.000000001;
+            break;
+        case UnitType.Angstrom:
+            isMetric = true;
+            coefficient = 0.0000000001;
+            break;
+        case UnitType.Inch:
+            coefficient = 1.0;
+            break;
+        case UnitType.MicroInch:
+            coefficient = 0.000001;
+            break;
+        case UnitType.Mil:
+            coefficient = 0.001;
+            break;
+        case UnitType.Foot:
+            coefficient = 12.0;
+            break;
+        case UnitType.Yard:
+            coefficient = 36.0;
+            break;
+        case UnitType.Mile:
+            coefficient = 63360.0;
+            break;
+    }
+}
+```
 
 ## Normalisation to absolute metrics for export
-By default, Aspose.CAD works with relative units of the drawing. However, there is a <a href="https://apireference.aspose.com/net/cad/aspose.cad.imageoptions/vectorrasterizationoptions/properties/unittype">UnitType</a> property in <a href="https://apireference.aspose.com/net/cad/aspose.cad.imageoptions/cadrasterizationoptions/">CadRasterizationOptions</a> class, which specifies used unit type. During render, a unit is interpreted as 10x10 pixels, so if an image has specified size of 10x10 m, it will be rasterized to 1000x1000 pixel image.
+By default, Aspose.CAD works with relative units of the drawing. However, there is a <a href="https://apireference.aspose.com/net/cad/aspose.cad.imageoptions/vectorrasterizationoptions/properties/unittype">UnitType</a> property in <a href="https://apireference.aspose.com/net/cad/aspose.cad.imageoptions/cadrasterizationoptions/">CadRasterizationOptions</a> class, which specifies used unit type. During render, a unit is interpreted as 1 pixel, so if an image has specified size of 10x10 m and centimeter is selected as unit type, the image will be rasterized to 1000x1000 pixel image.
 ```csharp
     string fileName = GetFileFromDesktop("Floorplan.dwg");
     using (Aspose.CAD.Image image = Aspose.CAD.Image.Load(fileName))
