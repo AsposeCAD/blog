@@ -281,6 +281,28 @@ using (Image image = Image.Load("example.dxf"))
                 image.Save(stream, pdfOptions);
             }
 ```
+## 3D object export support
+3D objects in AutoCAD and other file formats can be exported using Aspose.CAD. The library uses viewpoint stored in the file - so exported image will appear just as what can be seen in AutoCAD immediately on loading the file. 
+By default, only 2D objects are exported for AutoCAD files. To switch to 3D object export, set <a href="https://apireference.aspose.com/net/cad/aspose.cad.imageoptions/cadrasterizationoptions/properties/typeofentities">TypeOfEntities</a> property of <a href="https://apireference.aspose.com/net/cad/aspose.cad.imageoptions/cadrasterizationoptions">CadRasterizationOptions</a> instance  to <a href="https://apireference.aspose.com/net/cad/aspose.cad.imageoptions/typeofentities">TypeOfEntities</a>.Entities3D and perform export.
+Note that IFC files do not have stored viewpoint information, so you have to provide observation point during export. See the example:
+```csharp
+            using (IfcImage ifcImage = (IfcImage)Image.Load("ifcimage.ifc"))
+            {
+                JpegOptions options = new JpegOptions();
+                options.VectorRasterizationOptions = new CadRasterizationOptions();
+                options.VectorRasterizationOptions.PageWidth = 1500;
+                options.VectorRasterizationOptions.PageHeight = 1500;
+		float xAngle = 45;
+		float yAngle = 0;
+		float zAngle = 180;
+                ((CadRasterizationOptions)(options.VectorRasterizationOptions)).ObserverPoint = new ObserverPoint(xAngle, yAngle, zAngle);
+                ((CadRasterizationOptions)(options.VectorRasterizationOptions)).DrawType = CadDrawTypeMode.UseObjectColor;
+                ifcImage.Save("ifcrender.jpg", options);
+            }
+```
+
+## Multithreading support.
+All CAD files loaded by Aspose.CAD - the <a href="https://apireference.aspose.com/net/cad/aspose.cad/image/">Image</a> class instances - are independent and can be processed concurrently without problems. Though, manipulation with a single image should happen only within one thread.
 
 ## Coming soon - .Net Core support
 .Net Standard will be supported in the near future, so there will be a version of the library with native .NET Core support and hence, multiplatform support not only in Java, but in .Net as well.
