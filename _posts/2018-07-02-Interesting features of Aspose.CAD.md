@@ -281,6 +281,7 @@ using (Image image = Image.Load("example.dxf"))
                 image.Save(stream, pdfOptions);
             }
 ```
+
 ## 3D object export support
 3D objects in AutoCAD and other file formats can be exported using Aspose.CAD. The library uses viewpoint stored in the file - so exported image will appear just as what can be seen in AutoCAD immediately on loading the file. 
 By default, only 2D objects are exported for AutoCAD files. To switch to 3D object export, set <a href="https://apireference.aspose.com/net/cad/aspose.cad.imageoptions/cadrasterizationoptions/properties/typeofentities">TypeOfEntities</a> property of <a href="https://apireference.aspose.com/net/cad/aspose.cad.imageoptions/cadrasterizationoptions">CadRasterizationOptions</a> instance  to <a href="https://apireference.aspose.com/net/cad/aspose.cad.imageoptions/typeofentities">TypeOfEntities</a>.Entities3D and perform export.
