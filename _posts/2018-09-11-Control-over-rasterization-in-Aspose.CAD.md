@@ -37,7 +37,8 @@ In case of raster images, UnitType only matters when output dimensions are not s
 ### <a href="https://apireference.aspose.com/net/cad/aspose.cad.imageoptions/vectorrasterizationoptions/properties/contentasbitmap">ContentAsBitmap</a>:
 Only applicable when exporting to PDF, if it is set to true, the rendered image will be rasterized and embedded into PDF as raster image, instead of a regular vector one. Default is false.
 
-### <a href="https://apireference.aspose.com/net/cad/aspose.cad.imageoptions/vectorrasterizationoptions/properties/graphicsoptions">GraphicsOptions</a> - allows to set antialiasing level, interpolation quality and text rendering mode for raster images (including embedded in PDF)
+### <a href="https://apireference.aspose.com/net/cad/aspose.cad.imageoptions/vectorrasterizationoptions/properties/graphicsoptions">GraphicsOptions</a>:
+Allows to set antialiasing level, interpolation quality and text rendering mode for raster images (including embedded in PDF)
 
 ### <a href="https://apireference.aspose.com/net/cad/aspose.cad.imageoptions/cadrasterizationoptions/properties/zoom">Zoom</a>:
 Another way to specify margins. Value of 1 corresponds to exact fit, value below 1 allows to create margins, value above 1 allows to scale drawing up.
