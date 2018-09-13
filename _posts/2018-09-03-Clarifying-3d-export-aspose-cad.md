@@ -27,9 +27,12 @@ using (Aspose.CAD.Image cadImage = Aspose.CAD.Image.Load("image.dwg"))
 
 For AutoCAD files, most entity types will be exported in both cases, though with some differences due to projection. However, there are entities that are only exported when a corresponding entity type is set.
 Entities that are only exported in 2D mode include: attribute and attribute definition entities, underlays, raster images, Table, Text and MText entities. Entities that are only exported in 3D mode include: 3D face and solid entities, mesh entities, plane, swept, extruded and revolved surfaces.
-If 3D entities are selected for export, output image will be automatically centered to them - same way as when setting CenterDrawing property of CadRasterizationOptions to <b>true</b> - geometric center of all 3D entities in image is determined and is pinned to output image's center.
+If 3D entities are selected for export, output image will be automatically centered to them - same way as when setting <a href="https://apireference.aspose.com/net/cad/aspose.cad.imageoptions/vectorrasterizationoptions/properties/centerdrawing">CenterDrawing</a> property of <a href="https://apireference.aspose.com/net/cad/aspose.cad.imageoptions/cadrasterizationoptions">CadRasterizationOptions</a> to <b>true</b> - geometric center of all 3D entities in image is determined and is pinned to output image's center.
+Viewpoint used to render entities is always the viewpoint specified in CAD file - the same one that was last used in AutoCAD.
 
 For an STL file, you may not specify TypeOfEntities - it will be automatically set to Entities3D, as STL only has 3D entities anyway. Centering happens the same way.
+
+IFC files are also 3D by nature, and will be rendered regardless of how this option is set. <a href="https://apireference.aspose.com/net/cad/aspose.cad.imageoptions/cadrasterizationoptions/properties/observerpoint">ObserverPoint</a> is used to control viewpoint, default is "down" along Z axis.
 
 For other file formats, specifying 3D entities for export will only cause centering - this is a default behaviour for all formats.
 
