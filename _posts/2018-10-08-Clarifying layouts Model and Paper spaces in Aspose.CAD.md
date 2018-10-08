@@ -1,3 +1,9 @@
+---
+title: Clarifying layouts, Model and Paper spaces in Aspose.CAD.
+layout: post
+tags: csharp, java, cad, export
+---
+
 In AutoCAD workflow, there is concept of separate model and paper spaces. In model space, you create entities as they should physically appear, with real-world dimensions etc. To create an printable drawing, you switch to paper space and create layouts which contain viewports that display different views of model space, and various annotations. Here dimensions correspond to dimensions you'll see in actual paper print. Model space is accessible from Model tab, and paper space is accessible from layout tabs. 
 
 
