@@ -9,7 +9,7 @@ In AutoCAD workflow, there is concept of separate model and paper spaces. In mod
 
 ## How to see my paper space layouts using Aspose.CAD?
 
-<a href="https://products.aspose.com/cad">Aspose.CAD</a> supports all that, but has a bit different terminology. Both model space and paper space's layouts are called layouts, and model space just has a specific layout name - "Model". To select which layout to export, create an array of layout names (of string type, of course) and set <a href="https://apireference.aspose.com/net/cad/aspose.cad.imageoptions/cadrasterizationoptions/">CadRasterizationOptions</a>'s instance's <a href="https://apireference.aspose.com/net/cad/aspose.cad.imageoptions/cadrasterizationoptions/properties/layouts">Layouts</a> property with that array. Then all specified layouts will be exported at once as different pages, so if you do want to export several layouts at once, use PDF or TIFF as output format. See the following example:
+<a href="https://products.aspose.com/cad">Aspose.CAD</a> supports all that, but has a bit different terminology. Both model space and paper space's layouts are called layouts, and model space just has a specific layout name - "Model". To select which layout to export, create an array of layout names (of string type, of course) and set <a href="https://apireference.aspose.com/net/cad/aspose.cad.imageoptions/cadrasterizationoptions/">CadRasterizationOptions</a>'s instance's <a href="https://apireference.aspose.com/net/cad/aspose.cad.imageoptions/cadrasterizationoptions/properties/layouts">Layouts</a> property with that array. Then all specified layouts will be exported at once as different pages, so if you do want to export several layouts at once, use PDF or TIFF as output format. If you specify an single-page output format, only the first specified layout will be exported. See the following example:
 ```csharp
 using (Aspose.CAD.Image image = Aspose.CAD.Image.Load("source.dwg"))
 {
@@ -33,7 +33,7 @@ using (Aspose.CAD.Image image = Aspose.CAD.Image.Load("source.dwg"))
     image.Save("", options);                
 }
 ```
-As we can see, here we export model space and paper space's "Layout1" layout to two separate pages. By default, Layouts property is null and only model space, i.e. "Model" layout in Aspose.CAD's terms, is exported, as a single page, obviously. Logically, same will happen if you will set it with an array containing only one "Model" entry. To export other layouts, you have to specify their names, and for that, you obviously need to know them. Given that, a question arises:
+As we can see, here we export model space and paper space's "Layout1" layout to two separate pages. By default, Layouts property is null. The actual behaviour during export in that default case will vary somewhat depending on file. In most cases, all layouts will be exported. Empty paper space layouts, however, might not be exported. (And if you specify single-page output format, only the Model space will be exported - as it is first layout by default.) To export specific layouts or force all layouts, you have to specify their names, and for that, you obviously need to know them. Given that, a question arises:
 
 
 ## So how do I know my layouts' names?
