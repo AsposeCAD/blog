@@ -18,7 +18,7 @@ Aspose.CAD supports DWF V06 and newer (V06.xx) with original ePlot graphic forma
 By this name, essentially two different file formats exist: DGN V7 is covered by Intergraph Standard File Formats specification, a relatively simple file format, essentially, a vector graphic format supporting 3D objects. DGN V8 is developed by Bentley Systems and is a superset of both DGN V7 and DWG formats, and has a different file structure to DGN V7.
 Aspose.CAD supports DGN V7 format. Support is mostly complete.
 
-## <a href=https://ru.wikipedia.org/wiki/Industry_Foundation_Classes">IFC</a>
+## <a href="https://en.wikipedia.org/wiki/Industry_Foundation_Classes">IFC</a>
 IFC format has been developed as open specification to facilitate interoperability in architecture and construction, it is used for as collaboration format in building informational modelling projects.
 Aspose.CAD supports IFC2x3, the visual representation part of the standard is supported. Also, objects in IFC files, unlike others, can be rendered by Aspose.CAD from an arbitrary point of view. 
 
